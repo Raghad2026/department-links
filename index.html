@@ -414,7 +414,7 @@ var EN={supply:'Procurement',digital:'Digital Solutions'},AR={digital:'الحل�
 function nlabel(d){return esc(d.ar)+(d.en&&d.en!==d.ar?'<small class="en">'+esc(d.en)+'</small>':'');}
 var REPN=0;DEPTS.forEach(function(d){d.items.forEach(function(i){if(i.rep)REPN++;});});
 function renderNav(cur){
- var h='<a class="repnav'+(cur==='home'?' on':'')+'" href="#/">🏠 الرئيسية</a><a class="repnav'+(cur==='reports'?' on':'')+'" href="#/reports">📊 التقارير<span class="c">'+REPN+'</span></a>';
+ var h='<a class="repnav'+(cur==='home'?' on':'')+'" href="#/home">🏠 الرئيسية</a><a class="repnav'+(cur==='reports'?' on':'')+'" href="#/reports">📊 التقارير<span class="c">'+REPN+'</span></a>';
  var pm=M.pending[0]||{k:'management',ar:'الإدارة',en:'Management'};
  h+='<a href="#/management" class="'+(cur==='management'?'on':'')+'"><span class="nn">'+esc(pm.ar)+'<small class="en">'+esc(pm.en)+'</small></span><span class="c soon">قريباً</span></a>';
  if(me){var m0=BY[me.d];h+='<a class="mine'+(cur===me.d?' on':'')+'" href="#/'+me.d+'"><span class="nn">★ قسمي: '+nlabel(m0)+'</span></a><div class="navh">كل الأقسام</div>';}
@@ -569,7 +569,7 @@ function route(){
  if(p[0]==='management'){mgmtView();return;}
  if(p[0]==='reports'){reportsView(p[1]||null);return;}
  if(p[0]==='r'&&p[1]){roleView(decodeURIComponent(p[1]));return;}
- if(!p[0]){homeView();return;}
+ if(!p[0]||p[0]==='home'){homeView();return;}
  var sx=p[2]&&/^s\d+$/.test(p[2])?parseInt(p[2].slice(1),10):null;
  dept(p[0],p[1]||null,(p[2]!=null&&sx==null)?parseInt(p[2],10):null,sx);
 }
